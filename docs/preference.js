@@ -41,7 +41,7 @@ function start_experiment(){
     outfile = name + "_set" + set_num + "_100.csv";
     file_list = makeFileList()
     scores = (new Array(file_list.length)).fill(0);
-
+    eval = document.getElementsByName("eval");
     init()
 
 }
@@ -108,9 +108,7 @@ function evalCheck(){
     }
 }
 
-
-function setButton()
-{
+function setButton(){
     if (n == scores.length - 1) {
         document.getElementById("prev").disabled=false;
         document.getElementById("next").disabled=true;
@@ -140,43 +138,7 @@ function setButton()
     }
 }
 
-
-
-
-function setButton()
-{
-    if (n == scores.length - 1) {
-        document.getElementById("prev").disabled=false;
-        document.getElementById("next").disabled=true;
-        document.getElementById("finish").disabled=true;
-        for (var i=0; i<eval.length; i++) {
-            if (eval[i].checked) {
-                document.getElementById("finish").disabled=false;
-                break;
-            }
-        }
-    }
-    else {
-        if (n == 0) {
-            document.getElementById("prev").disabled=true;
-        }
-        else {
-            document.getElementById("prev").disabled=false;
-        }
-        document.getElementById("next").disabled=true;
-        document.getElementById("finish").disabled=true;
-        for (var i=0; i<eval.length; i++) {
-            if (eval[i].checked) {
-                document.getElementById("next").disabled=false;
-                break;
-            }
-        }
-    }
-}
-
-
-function evaluation()
-{
+function evaluation(){
     for (var i=0; i<eval.length; i++){
         if (eval[i].checked){
             scores[n] = i+1;
@@ -242,7 +204,6 @@ var method_mis;
 var outfile;
 var file_list;
 var scores;
-
 
 // ローカルで行う場合はloadText()は動作しないため
 var n = 0;
