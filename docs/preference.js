@@ -78,7 +78,7 @@ function makeFileList(){
 function setAudio(){
     document.getElementById("page").textContent = "" + (n+1) + "/" + scores.length;
 
-    document.getElementById("audio_a").innerHTML = 'Voice1:<br>';
+    document.getElementById("audio_a").innerHTML = 'Voice1:<br>'
         + '<audio src="' + file_list[n][0]
         + '" controls preload="auto">'
         + '</audio>';
