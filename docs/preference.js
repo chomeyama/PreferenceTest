@@ -41,10 +41,8 @@ function start_experiment() {
     var method_na = loadText(na_list);
     var method_mis = loadText(mis_list);
     var outfile = name + "_set" + set_num + "_100.csv";
-    console.log(method_na);
-    console.log(method_es);
-    console.log(method_mis);
-    console.log(outfile);
+    var file_list = makeFileList();
+    console.log(file_list);
 }
 
 // convert display
@@ -274,8 +272,6 @@ document.onkeypress = invalid_enter();
 
 // ローカルで行う場合はloadText()は動作しないため
 
-var file_list = makeFileList();
-console.log(file_list);
 
 var n = 0;
 
