@@ -165,7 +165,7 @@ function exportCSV(){
     var csvData = "";
     for (var i=0; i<files.length; i++) {
         csvData += "" + files[i][0] + ","
-        + files[i][0] + ","
+        + files[i][1] + ","
         + scores[i] + "\r\n";
     }
 
