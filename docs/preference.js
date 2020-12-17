@@ -17,13 +17,13 @@ function invalid_enter(){
 }
 
 // start experiment
-function start_experiment() {
+function start_experiment(){
     // get user name
     var name = document.getElementById("name").value;
     // get setlist number
     var number = document.getElementsByName("set");
-    for (var i=0; i<number.length; i++) {
-        if (number[i].checked) {
+    for (var i=0; i<number.length; i++){
+        if (number[i].checked){
             var set_num = number[i].value;
         }
     }
@@ -40,8 +40,8 @@ function start_experiment() {
     method_mis = loadText(mis_list);
     outfile = name + "_set" + set_num + "_100.csv";
 
-    file_list = makeFileList();
-    console.log(file_list);
+    init()
+
 }
 
 // convert display
@@ -63,7 +63,7 @@ function loadText(filename){
 // make file list
 function makeFileList(){
     var files = Array((method_es.length - 1) * 3);
-    for (var i=0; i<(method_es.length-1); i++) {
+    for (var i=0; i<(method_es.length-1); i++){
         files[i*3] = [method_es[i], method_na[i]].shuffle();
         files[i*3 + 1] = [method_es[i], method_mis[i]].shuffle();
         files[i*3 + 2] = [method_na[i], method_mis[i]].shuffle();
@@ -94,13 +94,17 @@ function init(){
     setButton();
 }
 
-
-
-
-
-
-
-
+function evalCheck(){
+    const c = scores[n];
+    if ((c <= 0) || (c > eval.length)) {
+        for (var i=0; i<eval.length; i++) {
+            eval[i].checked = false;
+        }
+    }
+    else {
+        eval[c-1].checked = true;
+    }
+}
 
 
 function setButton()
@@ -136,18 +140,6 @@ function setButton()
 
 
 
-function evalCheck()
-{
-    const c = scores[n];
-    if ((c <= 0) || (c > eval.length)) {
-        for (var i=0; i<eval.length; i++) {
-            eval[i].checked = false;
-        }
-    }
-    else {
-        eval[c-1].checked = true;
-    }
-}
 
 function setButton()
 {
@@ -265,14 +257,10 @@ var method_es;
 var method_na;
 var method_mis;
 var outfile;
-
 var file_list;
 
 
 // ローカルで行う場合はloadText()は動作しないため
-
-
 var n = 0;
-
 var eval = document.getElementsByName("eval");
 var scores = (new Array(file_list.length)).fill(0);
