@@ -1,6 +1,6 @@
 Array.prototype.shuffle = function(){
     var i = this.length;
-    while (i) {
+    while(i){
         var j = Math.floor(Math.random() * i);
         var t = this[--i];
         this[i] = this[j];
@@ -28,8 +28,8 @@ function start_experiment(){
     // get setlist number
     var set_num = "0"
     var number = document.getElementsByName("set");
-    for (var i=0; i<number.length; i++){
-        if (number[i].checked){
+    for(var i=0; i<number.length; i++){
+        if(number[i].checked){
             set_num = number[i].value;
         }
     }
@@ -79,7 +79,7 @@ function loadText(filename){
 // make file list
 function makeFileList(){
     var files = Array((method_es.length - 1) * 3);
-    for (var i=0; i<(method_es.length-1); i++){
+    for(var i=0; i<(method_es.length-1); i++){
         files[i*3] = [method_es[i], method_na[i]].shuffle();
         files[i*3 + 1] = [method_es[i], method_mis[i]].shuffle();
         files[i*3 + 2] = [method_na[i], method_mis[i]].shuffle();
@@ -112,39 +112,39 @@ function init(){
 
 function evalCheck(){
     const c = scores[n];
-    if ((c <= 0) || (c > eval.length)) {
-        for (var i=0; i<eval.length; i++) {
+    if((c <= 0) || (c > eval.length)){
+        for(var i=0; i<eval.length; i++){
             eval[i].checked = false;
         }
     }
-    else {
+    else{
         eval[c-1].checked = true;
     }
 }
 
 function setButton(){
-    if (n == (scores.length - 1)) {
+    if(n == (scores.length - 1)){
         document.getElementById("prev").disabled=false;
-        document.getElementById("next").disabled=true;
+        document.getElementById("next2").disabled=true;
         document.getElementById("finish").disabled=true;
-        for (var i=0; i<eval.length; i++) {
-            if (eval[i].checked) {
+        for(var i=0; i<eval.length; i++){
+            if(eval[i].checked){
                 document.getElementById("finish").disabled=false;
                 break;
             }
         }
     }
-    else {
-        if (n == 0) {
+    else{
+        if(n == 0){
             document.getElementById("prev").disabled=true;
         }
-        else {
+        else{
             document.getElementById("prev").disabled=false;
         }
-        document.getElementById("next").disabled=true;
+        document.getElementById("next2").disabled=true;
         document.getElementById("finish").disabled=true;
-        for (var i=0; i<eval.length; i++) {
-            if (eval[i].checked) {
+        for(var i=0; i<eval.length; i++){
+            if(eval[i].checked){
                 document.getElementById("next").disabled=false;
                 break;
             }
@@ -153,8 +153,8 @@ function setButton(){
 }
 
 function evaluation(){
-    for (var i=0; i<eval.length; i++){
-        if (eval[i].checked){
+    for(var i=0; i<eval.length; i++){
+        if(eval[i].checked){
             scores[n] = i+1;
         }
     }
@@ -163,7 +163,7 @@ function evaluation(){
 
 function exportCSV(){
     var csvData = "";
-    for (var i=0; i<file_list.length; i++) {
+    for(var i=0; i<file_list.length; i++){
         csvData += "" + file_list[i][0] + ","
         + file_list[i][1] + ","
         + scores[i] + "\r\n";
