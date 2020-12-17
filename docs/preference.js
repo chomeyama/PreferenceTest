@@ -28,8 +28,6 @@ function start_experiment() {
         }
     }
 
-    console.log(name);
-    console.log(set_num);
     //convert display
     Display()
 
@@ -37,11 +35,12 @@ function start_experiment() {
     var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
     var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
     var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
-    var method_es = loadText(es_list);
-    var method_na = loadText(na_list);
-    var method_mis = loadText(mis_list);
-    var outfile = name + "_set" + set_num + "_100.csv";
-    var file_list = makeFileList();
+    method_es = loadText(es_list);
+    method_na = loadText(na_list);
+    method_mis = loadText(mis_list);
+    outfile = name + "_set" + set_num + "_100.csv";
+
+    file_list = makeFileList();
     console.log(file_list);
 }
 
@@ -88,11 +87,12 @@ function setAudio(){
         + '</audio>';
 }
 
-
-
-
-
-
+function init(){
+    n = 0;
+    setAudio();
+    evalCheck();
+    setButton();
+}
 
 
 
@@ -230,14 +230,6 @@ function exportCSV()
     link.parentNode.removeChild(link);
 }
 
-function init()
-{
-    n = 0;
-    setAudio();
-    evalCheck();
-    setButton();
-    // showScores();
-}
 
 function next()
 {
@@ -268,6 +260,13 @@ const wav_dir = "wav/w_vctk/T100/";
 
 // invalid enter key
 document.onkeypress = invalid_enter();
+
+var method_es;
+var method_na;
+var method_mis;
+var outfile;
+
+var file_list;
 
 
 // ローカルで行う場合はloadText()は動作しないため
