@@ -123,7 +123,7 @@ function evalCheck(){
 }
 
 function setButton(){
-    if (n == scores.length - 1) {
+    if (n == (scores.length - 1)) {
         document.getElementById("prev").disabled=false;
         document.getElementById("next").disabled=true;
         document.getElementById("finish").disabled=true;
@@ -163,9 +163,9 @@ function evaluation(){
 
 function exportCSV(){
     var csvData = "";
-    for (var i=0; i<files.length; i++) {
-        csvData += "" + files[i][0] + ","
-        + files[i][1] + ","
+    for (var i=0; i<file_list.length; i++) {
+        csvData += "" + file_list[i][0] + ","
+        + file_list[i][1] + ","
         + scores[i] + "\r\n";
     }
 
