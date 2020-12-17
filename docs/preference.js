@@ -32,13 +32,17 @@ function start_experiment(){
     Display()
 
     // lead filepath
-    var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
-    var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
-    var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
+    //var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
+    //var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
+    //var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
+    var es_list = wav_dir + "test/test_ES.list";
+    var na_list = wav_dir + "test/test_NA.list";
+    var mis_list = wav_dir + "test/test_misacoustic.list";
     method_es = loadText(es_list);
     method_na = loadText(na_list);
     method_mis = loadText(mis_list);
-    outfile = name + "_set" + set_num + "_100.csv";
+    //outfile = name + "_set" + set_num + "_100.csv";
+    outfile = name + "_test_100.csv";
     file_list = makeFileList()
     scores = (new Array(file_list.length)).fill(0);
     eval = document.getElementsByName("eval");
@@ -147,12 +151,12 @@ function evaluation(){
     setButton();
 }
 
-function exportCSV()
-{
+function exportCSV(){
     var csvData = "";
     for (var i=0; i<pairs.length; i++) {
-        csvData += "" + pairs[i][0] + ","
-            + pairs[i][scores[i]] + "\r\n";
+        csvData += "" + files[i][0] + ","
+        + files[i][0] + ","
+        + scores[i] + "\r\n";
     }
 
     const link = document.createElement("a");
