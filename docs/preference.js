@@ -34,7 +34,7 @@ function start_experiment(){
         }
     }
     if(set_num == "0"){
-        alert("Please press the button.");
+        alert("Please press the setlist number button.");
         return false;
     }
 
@@ -42,17 +42,13 @@ function start_experiment(){
     Display()
 
     // lead filepath
-    //var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
-    //var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
-    //var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
-    var es_list = wav_dir + "test/test_ES.list";
-    var na_list = wav_dir + "test/test_NA.list";
-    var mis_list = wav_dir + "test/test_misacoustic.list";
+    var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
+    var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
+    var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
     method_es = loadText(es_list);
     method_na = loadText(na_list);
     method_mis = loadText(mis_list);
-    //outfile = name + "_set" + set_num + "_100.csv";
-    outfile = name + "_test_100.csv";
+    outfile = name + "_set" + set_num + "_100.csv";
     file_list = makeFileList()
     scores = (new Array(file_list.length)).fill(0);
     eval = document.getElementsByName("eval");
@@ -145,7 +141,7 @@ function setButton(){
         document.getElementById("finish").disabled=true;
         for(var i=0; i<eval.length; i++){
             if(eval[i].checked){
-                document.getElementById("next").disabled=false;
+                document.getElementById("next2").disabled=false;
                 break;
             }
         }
