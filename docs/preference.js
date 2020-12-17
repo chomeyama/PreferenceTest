@@ -39,6 +39,8 @@ function start_experiment(){
     method_na = loadText(na_list);
     method_mis = loadText(mis_list);
     outfile = name + "_set" + set_num + "_100.csv";
+    file_list = makeFileList()
+    scores = (new Array(file_list.length)).fill(0);
 
     init()
 
@@ -181,26 +183,7 @@ function evaluation()
         }
     }
     setButton();
-    // showScores();
 }
-
-
-function showScores()
-{
-    var r = Math.floor(scores.length / 10);
-    var table = "";
-    for(var i=0; i<r; i++){
-        for(var j=0; j<10; j++){
-            table += scores[i*10+j] + " ";
-        }
-        table += "<br>";
-    }
-    for(var j=0; j<scores.length%10; j++){
-        table += scores[r*10+j] + " ";
-    }
-    document.getElementById("table").innerHTML = table;
-}
-
 
 function exportCSV()
 {
@@ -258,9 +241,9 @@ var method_na;
 var method_mis;
 var outfile;
 var file_list;
+var scores;
 
 
 // ローカルで行う場合はloadText()は動作しないため
 var n = 0;
 var eval = document.getElementsByName("eval");
-var scores = (new Array(file_list.length)).fill(0);
