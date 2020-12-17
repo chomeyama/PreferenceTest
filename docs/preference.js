@@ -1,5 +1,4 @@
-Array.prototype.shuffle = function()
-{
+Array.prototype.shuffle = function(){
     var i = this.length;
     while (i) {
         var j = Math.floor(Math.random() * i);
@@ -10,48 +9,136 @@ Array.prototype.shuffle = function()
     return this;
 }
 
-function loadText(filename)
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", filename, false);
-    xhr.send(null);
-    var data = xhr.responseText.split(/\r\n|\r|\n/);
-
-    return data;
+// invalid enter key
+function invalid_enter(){
+    if(window.event.keyCode == 13){
+        return false;
+    }
 }
 
-function makePairs()
-{
-    const N = sp_name.length;
-    const M = method_a.length;
-    var pairs = new Array(N * M);
-    var methods;
-
-    for (var i=0; i<N; i++) {
-        for (var j=0; j<M; j++) {
-            methods = [method_a[j], method_b[j]].shuffle();
-            pairs[i*M+j] = [sp_name[i], methods[0], methods[1]];
+// start experiment
+function start_experiment() {
+    // get user name
+    var name = document.getElementById("name").value;
+    // get setlist number
+    var number = document.getElementsByName("set");
+    for (var i=0; i<number.length; i++) {
+        if (number[i].checked) {
+            var set_num = number[i].value;
         }
     }
 
-    pairs.shuffle();
-    
-    return pairs;
+    console.log(name);
+    console.log(set_num);
+    //convert display
+    Display()
+
+    // lead filepath
+    var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
+    var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
+    var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
+    var method_es = loadText(es_list);
+    var method_na = loadText(na_list);
+    var method_mis = loadText(mis_list);
+    var outfile = name + "_set" + set_num + "_100.csv";
+    console.log(method_na);
+    console.log(method_es);
+    console.log(method_mis);
+    console.log(outfile);
 }
 
-function makeFileList()
-{
-    var files = Array(pairs.length);
-    for (var i=0; i<pairs.length; i++) {
-        sub_a_file = "" + wav_dir + "/" + pairs[i][0] + "_" 
-            + pairs[i][1] + ".wav";
-        sub_b_file = "" + wav_dir + "/" + pairs[i][0] + "_" 
-            + pairs[i][2] + ".wav";
-        files[i] = [sub_a_file, sub_b_file];
+// convert display
+function Display(){
+    document.getElementById("Display1").style.display = "none";
+    document.getElementById("Display2").style.display = "block";
+}
+
+// load text file
+function loadText(filename){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", filename, false);
+    xhr.send(null);
+    var list = xhr.responseText.split(/\r\n|\r|\n/);
+
+    return list;
+}
+
+// make file list
+function makeFileList(){
+    var files = Array(method_es.length * 3);
+    for (var i=0; i<method_es.length; i++) {
+        files[i*3] = [method_es[i], method_na[i]].shuffle();
+        files[i*3 + 1] = [method_es[i], method_mis[i]].shuffle();
+        files[i*3 + 2] = [method_na[i], method_mis[i]].shuffle();
     }
+    files.shuffle();
 
     return files;
 }
+
+function setAudio(){
+    document.getElementById("page").textContent = "" + (n+1) + "/" + scores.length;
+
+    document.getElementById("audio_a").innerHTML = 'Voice1:<br>';
+        + '<audio src="' + file_list[n][0]
+        + '" controls preload="auto">'
+        + '</audio>';
+    showLabels();
+
+    document.getElementById("audio_b").innerHTML = 'Voice2:<br>'
+        + '<audio src="' + file_list[n][1]
+        + '" controls preload="auto">'
+        + '</audio>';
+    showLabels();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setButton()
+{
+    if (n == scores.length - 1) {
+        document.getElementById("prev").disabled=false;
+        document.getElementById("next").disabled=true;
+        document.getElementById("finish").disabled=true;
+        for (var i=0; i<eval.length; i++) {
+            if (eval[i].checked) {
+                document.getElementById("finish").disabled=false;
+                break;
+            }
+        }
+    }
+    else {
+        if (n == 0) {
+            document.getElementById("prev").disabled=true;
+        }
+        else {
+            document.getElementById("prev").disabled=false;
+        }
+        document.getElementById("next").disabled=true;
+        document.getElementById("finish").disabled=true;
+        for (var i=0; i<eval.length; i++) {
+            if (eval[i].checked) {
+                document.getElementById("next").disabled=false;
+                break;
+            }
+        }
+    }
+}
+
+
 
 function evalCheck()
 {
@@ -129,7 +216,7 @@ function showScores()
 function setAudio()
 {
     document.getElementById("page").textContent = "" + (n+1) + "/" + scores.length;
-    
+
     document.getElementById("sub_a").innerHTML = '評価歌声A<br>'
         + '<audio src="' + file_list[n][1]
         + '" controls preload="auto">'
@@ -144,7 +231,7 @@ function exportCSV()
 {
     var csvData = "";
     for (var i=0; i<pairs.length; i++) {
-        csvData += "" + pairs[i][0] + "," 
+        csvData += "" + pairs[i][0] + ","
             + pairs[i][scores[i]] + "\r\n";
     }
 
@@ -194,29 +281,18 @@ function finish()
 // --------- 設定 --------- //
 
 // ディレクトリ名
-const wav_dir = "wav_AB";
-// 音声の名前(prefix)のリストのファイル名
-const name_file = "name.txt";
-// 手法Aの名前(suffix)のリストのファイル名
-const method_a_file = "methodA.txt";
-// 手法Bの名前(suffix)のリストのファイル名
-const method_b_file = "methodB.txt";
-// 出力ファイル名
-const outfile = "ab.csv";
+const wav_dir = "wav/w_vctk/T100/";
 
-// ------------------------ //
+// invalid enter key
+document.onkeypress = invalid_enter();
 
 
 // ローカルで行う場合はloadText()は動作しないため
-// 配列を用いて直接指定する
-const sp_name = loadText(name_file);
-const method_a = loadText(method_a_file);
-const method_b = loadText(method_b_file);
 
-var pairs = makePairs();
 var file_list = makeFileList();
 console.log(file_list);
 
 var n = 0;
+
 var eval = document.getElementsByName("eval");
 var scores = (new Array(file_list.length)).fill(0);
