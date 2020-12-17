@@ -20,12 +20,22 @@ function invalid_enter(){
 function start_experiment(){
     // get user name
     var name = document.getElementById("name").value;
+    if(name == ""){
+        alert("Please enter your name.");
+        return false;
+    }
+
     // get setlist number
+    var set_num = "0"
     var number = document.getElementsByName("set");
     for (var i=0; i<number.length; i++){
         if (number[i].checked){
-            var set_num = number[i].value;
+            set_num = number[i].value;
         }
+    }
+    if(name == "0"){
+        alert("Please press the button.");
+        return false;
     }
 
     //convert display
@@ -153,7 +163,7 @@ function evaluation(){
 
 function exportCSV(){
     var csvData = "";
-    for (var i=0; i<pairs.length; i++) {
+    for (var i=0; i<files.length; i++) {
         csvData += "" + files[i][0] + ","
         + files[i][0] + ","
         + scores[i] + "\r\n";
@@ -171,25 +181,21 @@ function exportCSV(){
     link.parentNode.removeChild(link);
 }
 
-
-function next()
-{
+function next(){
     n++;
     setAudio();
     evalCheck();
     setButton();
 }
 
-function prev()
-{
+function prev(){
     n--;
     setAudio();
     evalCheck();
     setButton();
 }
 
-function finish()
-{
+function finish(){
     exportCSV();
 }
 
