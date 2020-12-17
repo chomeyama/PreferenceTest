@@ -83,13 +83,11 @@ function setAudio(){
         + '<audio src="' + file_list[n][0]
         + '" controls preload="auto">'
         + '</audio>';
-    showLabels();
 
     document.getElementById("audio_b").innerHTML = 'Voice2:<br>'
         + '<audio src="' + file_list[n][1]
         + '" controls preload="auto">'
         + '</audio>';
-    showLabels();
 }
 
 
@@ -213,19 +211,6 @@ function showScores()
     document.getElementById("table").innerHTML = table;
 }
 
-function setAudio()
-{
-    document.getElementById("page").textContent = "" + (n+1) + "/" + scores.length;
-
-    document.getElementById("sub_a").innerHTML = '評価歌声A<br>'
-        + '<audio src="' + file_list[n][1]
-        + '" controls preload="auto">'
-        + '</audio>';
-    document.getElementById("sub_b").innerHTML = '評価歌声B<br>'
-        + '<audio src="' + file_list[n][0]
-        + '" controls preload="auto">'
-        + '</audio>';
-}
 
 function exportCSV()
 {
