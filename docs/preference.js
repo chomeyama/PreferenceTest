@@ -33,7 +33,7 @@ function start_experiment(){
             set_num = number[i].value;
         }
     }
-    if(name == "0"){
+    if(set_num == "0"){
         alert("Please press the button.");
         return false;
     }
