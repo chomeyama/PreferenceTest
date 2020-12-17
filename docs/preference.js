@@ -65,8 +65,8 @@ function loadText(filename){
 
 // make file list
 function makeFileList(){
-    var files = Array(method_es.length * 3);
-    for (var i=0; i<method_es.length; i++) {
+    var files = Array((method_es.length - 1) * 3);
+    for (var i=0; i<(method_es.length-1); i++) {
         files[i*3] = [method_es[i], method_na[i]].shuffle();
         files[i*3 + 1] = [method_es[i], method_mis[i]].shuffle();
         files[i*3 + 2] = [method_na[i], method_mis[i]].shuffle();
