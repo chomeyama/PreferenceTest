@@ -19,7 +19,7 @@ function invalid_enter(){
 // start experiment
 function start_experiment(){
     // get user name
-    var name = document.getElementById("name").value;
+    var name = document.getElementById("name").value.replace(" ", "_");
     if(name == ""){
         alert("Please enter your name.");
         return false;
@@ -42,13 +42,13 @@ function start_experiment(){
     Display()
 
     // lead filepath
-    var es_list = wav_dir + "set" + set_num + "/set" + set_num + "_ES.list";
-    var na_list = wav_dir + "set" + set_num + "/set" + set_num + "_NA.list";
-    var mis_list = wav_dir + "set" + set_num + "/set" + set_num + "_misacoustic.list";
-    method_es = loadText(es_list);
-    method_na = loadText(na_list);
-    method_mis = loadText(mis_list);
-    outfile = name + "_set" + set_num + "_100.csv";
+    var method1_list = wav_dir + "set" + set_num + "/set" + set_num + "_method1.list";
+    var method2_list = wav_dir + "set" + set_num + "/set" + set_num + "_method2.list";
+    var method3_list = wav_dir + "set" + set_num + "/set" + set_num + "_method3.list";
+    method1 = loadText(method1_list);
+    method2 = loadText(method2_list);
+    method3 = loadText(method3_list);
+    outfile = name + "_set" + set_num + ".csv";
     file_list = makeFileList()
     scores = (new Array(file_list.length)).fill(0);
     eval = document.getElementsByName("eval");
@@ -68,17 +68,18 @@ function loadText(filename){
     xhr.open("GET", filename, false);
     xhr.send(null);
     var list = xhr.responseText.split(/\r\n|\r|\n/);
+    list.pop()
 
     return list;
 }
 
 // make file list
 function makeFileList(){
-    var files = Array((method_es.length - 1) * 3);
-    for(var i=0; i<(method_es.length-1); i++){
-        files[i*3] = [method_es[i], method_na[i]].shuffle();
-        files[i*3 + 1] = [method_es[i], method_mis[i]].shuffle();
-        files[i*3 + 2] = [method_na[i], method_mis[i]].shuffle();
+    var files = Array((method1.length) * 3);
+    for(var i=0; i<(method1.length); i++){
+        files[i*3] = [method1[i], method2[i]].shuffle();
+        files[i*3 + 1] = [method1[i], method3[i]].shuffle();
+        files[i*3 + 2] = [method2[i], method3[i]].shuffle();
     }
     files.shuffle();
 
@@ -198,15 +199,15 @@ function finish(){
 
 // --------- 設定 --------- //
 
-// ディレクトリ名
-const wav_dir = "wav/w_vctk/T100/";
+// directory name
+const wav_dir = "wav/";
 
 // invalid enter key
 document.onkeypress = invalid_enter();
 
-var method_es;
-var method_na;
-var method_mis;
+var method1;
+var method2;
+var method3;
 var outfile;
 var file_list;
 var scores;
