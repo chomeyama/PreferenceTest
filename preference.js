@@ -79,7 +79,6 @@ function makeFileList(){
     for(var i=0; i<(method1.length); i++){
         pairs = [[method1[i], method2[i]], [method2[i], method1[i]], [method2[i], method3[i]],
                  [method3[i], method2[i]], [method1[i], method3[i]], [method3[i], method1[i]]]
-        alert("pairs len = " + (pairs.length));
         for(var j=0; j<6; j++){
             files[i*6 + j] = pairs[j];
         }
