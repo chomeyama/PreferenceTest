@@ -42,9 +42,9 @@ function start_experiment(){
     Display()
 
     // lead filepath
-    var method1_list = wav_dir + "set" + set_num + "/set" + set_num + "_method1.list";
-    var method2_list = wav_dir + "set" + set_num + "/set" + set_num + "_method2.list";
-    var method3_list = wav_dir + "set" + set_num + "/set" + set_num + "_method3.list";
+    var method1_list = wav_dir + "set" + set_num + "/method1.list";
+    var method2_list = wav_dir + "set" + set_num + "/method2.list";
+    var method3_list = wav_dir + "set" + set_num + "/method3.list";
     method1 = loadText(method1_list);
     method2 = loadText(method2_list);
     method3 = loadText(method3_list);
