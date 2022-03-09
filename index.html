@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Preference Test</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 注意書きなど -->
+        <br>
+        <div style="border:1px solid #000; padding: 15px;">
+            <h1>Preference Test</h1>
+
+            <p>
+                Thank you for your cooperation in my experiment!<br>
+                The experimental procedure is as follows.
+            </p>
+
+            <h2>Experimental Procedure</h2>
+            <ol>
+                <li>Enter your name and area you live.</li>
+                <li>Press "Start Experiment" button.</li>
+                <li>Listen to the displayed audio and give it the rating you think it deserves.<br>
+                    The evaluation criteria is <b>How much X and Y sounds natural as the same speaker's voice.</b>.</li>
+                <li>Press "next" button and start next evaluation.</li>
+                <li>When you finish the last evaluation, press "finish" button and download the result.<br>
+                    Send it to Slack or the following email address.</li>
+                <li>Email : yoneyama.reo@g.sp.m.is.nagoya-u.ac.jp</li>
+            </ol>
+
+            <h2>Notes</h2>
+            <ul>
+                <li>This experiment takes about 30 minutes.</li>
+                <li>Please do not update the page during this experiment.</li>
+                <li>If you are using a smartphone, you may not be able to download the result, so we recommend using a
+                    PC.
+                </li>
+                <li>Please conduct this experiment using headphones or earphones in a silent place.</li>
+                <li>All information obtained in this experiment will not be used for any purpose other than this
+                    experiment.
+                </li>
+            </ul>
+
+            <!-- <h2>実験手順</h2>
+            <ol>
+                <li>名前と出身地を入力して下さい。</li>
+                <li>"Start Experiment"を押して下さい。</li>
+                <li>音声を聴き、相応しいと思った評価を選択して下さい。<br>
+                    評価基準は<b>音質</b>です。</li>
+                <li>選択を終えたら"next"ボタンを押し、次の実験に進んで下さい。</li>
+                <li>評価実験を全て終えたら"finish"ボタンを押して結果をダウンロードして下さい。<br>
+                    結果はSlackか下記のメールアドレスに送信して下さい。</li>
+                <li>Email : yoneyama.reo@g.sp.m.is.nagoya-u.ac.jp</li>
+            </ol>
+
+            <h2>注意</h2>
+            <ul>
+                <li>この実験は凡そ30分ほど要します。</li>
+                <li>実験中はページの再読み込みは行わないで下さい。</li>
+                <li>スマートフォンでは結果をダウンロードできない場合があるため、PCを使用することをお勧めします。</li>
+                <li>ヘッドホンかイヤホンを着用し、静かな環境で行って下さい。</li>
+                <li>この実験で得られた全ての情報は本実験以外には使用致しません。</li>
+            </ul> -->
+        </div>
+        <br>
+
+        <script type="text/javascript" src="preference.js"></script>
+
+        <div id="Display1">
+            <p>
+                <label for="name"> Name </label><br>
+                <input type="text" id="name" class="form-controll" placeholder="e.g. Taro Yamada">
+            </p>
+            <p>
+                <button id="start" onclick="start_experiment()">start</button>
+            </p>
+        </div>
+
+        <div id="Display2" style="display:none;">
+            <p id="page"></p>
+            <p id="audio_a"></p>
+            <p id="audio_b"></p>
+            <p>
+                <label><input type="radio" name="eval" onclick="evaluation()">A</label><br>
+                <label><input type="radio" name="eval" onclick="evaluation()">B</label><br>
+            </p>
+
+            <p>
+                <button id="prev" onclick="prev()">prev</button>
+                <button id="next" onclick="next()">next</button>
+                <button id="finish" onclick="finish()">finish</button>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
