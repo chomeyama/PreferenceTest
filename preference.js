@@ -16,7 +16,7 @@ function invalid_enter() {
     }
 }
 
-const pickN = (min, max, n) => {
+const pickRands = (min, max, n) => {
     const list = new Array(max - min + 1).fill().map((_, i) => i + min);
     const ret = [];
     while (n--) {
@@ -42,7 +42,7 @@ function start_experiment() {
     methods.push(wav_dir + "world/");
     methods.push(wav_dir + "psfgan/");
 
-    var rands = pickN(0, n_utt, 8);
+    var rands = pickRands(0, n_utt, 6);
 
     file_list = makeFileList(methods, rands);
     outfile = name + ".csv";
@@ -215,7 +215,7 @@ function finish() {
 
 // directory name
 const wav_dir = "wav/";
-const wavnames = "wav/wavnames.txt"
+const wavnames = "wav/sample.list"
 const n_utt = 4 * 66;
 
 // invalid enter key
