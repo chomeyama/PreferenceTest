@@ -216,7 +216,7 @@ function finish() {
 // directory name
 const wav_dir = "wav/";
 const wavnames = "wav/sample.list"
-const n_utt = 4 * 66;
+const n_utt = 600;
 
 // invalid enter key
 document.onkeypress = invalid_enter();
