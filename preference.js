@@ -39,10 +39,11 @@ function start_experiment() {
     Display();
 
     var methods = [];
-    methods.push(wav_dir + "world/");
-    methods.push(wav_dir + "psfgan/");
+    methods.push(wav_dir + "method1/");
+    methods.push(wav_dir + "method2/");
 
-    var rands = pickRands(0, n_utt, 6);
+    var num_utt_ids = 10;
+    var rands = pickRands(0, n_utt, num_utt_ids);
 
     file_list = makeFileList(methods, rands);
     outfile = name + ".csv";
@@ -75,23 +76,7 @@ function makeFileList(methods, rands) {
     for (var i = 0; i < methods.length - 1; i++) {
         for (var j = i + 1; j < methods.length; j++) {
             for (var k = 0; k < rands.length; k++) {
-                pair = [methods[i] + names[rands[k]] + "_f0.50.wav", methods[j] + names[rands[k]] + "_f0.50.wav"];
-                files.push(pair);
-                pair = [methods[i] + names[rands[k]] + "_f0.71.wav", methods[j] + names[rands[k]] + "_f0.71.wav"];
-                files.push(pair);
-                pair = [methods[i] + names[rands[k]] + "_f1.41.wav", methods[j] + names[rands[k]] + "_f1.41.wav"];
-                files.push(pair);
-                pair = [methods[i] + names[rands[k]] + "_f2.00.wav", methods[j] + names[rands[k]] + "_f2.00.wav"];
-                files.push(pair);
                 pair = [methods[i] + names[rands[k]] + ".wav", methods[j] + names[rands[k]] + ".wav"];
-                files.push(pair);
-                pair = [methods[j] + names[rands[k]] + "_f0.50.wav", methods[i] + names[rands[k]] + "_f0.50.wav"];
-                files.push(pair);
-                pair = [methods[j] + names[rands[k]] + "_f0.71.wav", methods[i] + names[rands[k]] + "_f0.71.wav"];
-                files.push(pair);
-                pair = [methods[j] + names[rands[k]] + "_f1.41.wav", methods[i] + names[rands[k]] + "_f1.41.wav"];
-                files.push(pair);
-                pair = [methods[j] + names[rands[k]] + "_f2.00.wav", methods[i] + names[rands[k]] + "_f2.00.wav"];
                 files.push(pair);
                 pair = [methods[j] + names[rands[k]] + ".wav", methods[i] + names[rands[k]] + ".wav"];
                 files.push(pair);
@@ -169,7 +154,7 @@ function setButton() {
 function evaluation() {
     for (var i = 0; i < eval.length; i++) {
         if (eval[i].checked) {
-            scores[n] = i;
+            scores[n] = i + 1;
         }
     }
     setButton();
